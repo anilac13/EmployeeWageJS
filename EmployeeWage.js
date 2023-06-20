@@ -104,3 +104,35 @@ let partTimeWageArray = mapArray.filter(partTimeWage);
 console.log(partTimeWageArray);
 
 console.log("================================================\nNumber of days Employee worked: " + EmpWageArray.reduce(findNumOfDays, 0));
+
+
+//Using Arrow Functions
+let totalWage = (totalWage, dailyWage) => (totalWage + dailyWage);
+let totalHours = Array.from(empDailyHrsMap.values()).reduce(totalWage, 0);
+let totalSalary = EmpWageArray.filter(dailyWage=>dailyWage>0).reduce(totalWage, 0);
+console.log("=========================================");
+console.log("Emp total wage and total hrs using Arrow function");
+console.log("-------------------------------------------");
+console.log("Total Hrs: "+totalHours+"\tTotal Wage: "+totalSalary);
+
+let nonWorkingDays = new Array();
+let fullWorkingDays = new Array();
+let halfWorkingDays = new Array();
+empDailyHrsMap.forEach((values, key)=> {
+    if (values == 8) fullWorkingDays.push(key);
+    else if (values == 4) halfWorkingDays.push(key);
+    else nonWorkingDays.push(key);
+});
+
+console.log("===================================================");
+console.log("Full working days array");
+console.log("----------------------------------------------------");
+console.log(fullWorkingDays);
+console.log("===================================================");
+console.log("Half working days array");
+console.log("----------------------------------------------------");
+console.log(halfWorkingDays);
+console.log("===================================================");
+console.log("No working days array");
+console.log("----------------------------------------------------");
+console.log(nonWorkingDays);
