@@ -8,6 +8,8 @@ let EmpWageArray = new Array();
 let empDailyWageMap = new Map();
 let empDailyHrsMap = new Map();
 
+let empDailyWageAndHrsArray = new Array();
+
 while (totlEmpHrs <= TOTAL_WORKIG_HRS && totalWorkingDays < NUM_OF_WORKINGDAYS)
 {
     totalWorkingDays++;
@@ -18,7 +20,18 @@ while (totlEmpHrs <= TOTAL_WORKIG_HRS && totalWorkingDays < NUM_OF_WORKINGDAYS)
 
     empDailyHrsMap.set(totalWorkingDays, empHrs);
     empDailyWageMap.set(totalWorkingDays, calculateWage(empHrs));
+
+    empDailyWageAndHrsArray.push({
+        dayNum: totalWorkingDays,
+        dailyHours: empHrs,
+        dailyWage: calculateWage(empHrs),
+        toString(){
+            return "\nDay "+this.dayNum + " => working hours is: "+this.dailyHours+" and Wage earned is: "+this.dailyWage;
+        }
+    });
 }
+console.log("Showing daily hrs worked and wage earned \n------------------------------------"+empDailyWageAndHrsArray);
+
 function getEmpHrs(empCheck)
 {
     switch (empCheck)
@@ -118,6 +131,7 @@ console.log("Total Hrs: "+totalHours+"\tTotal Wage: "+totalSalary);
 let nonWorkingDays = new Array();
 let fullWorkingDays = new Array();
 let halfWorkingDays = new Array();
+
 empDailyHrsMap.forEach((values, key)=> {
     if (values == 8) fullWorkingDays.push(key);
     else if (values == 4) halfWorkingDays.push(key);
