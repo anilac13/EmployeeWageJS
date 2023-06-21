@@ -1,34 +1,34 @@
 class Employee{
-    //property
     id;
     salary;
+    gender;
+    startDate;
 
-    //constructor
-    constructor(id,name,salary){
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
-    }
-
-    //getter and setter method
-    get id() { return this._id; }
-    set id(value){
-        this._id = value;
+    constructor(...parms){
+        this.id = parms[0];
+        this.name = parms[1];
+        this.salary = parms[2];
+        this.gender = parms[3];
+        this.startDate = parms[4];
     }
 
     get name() { return this._name; }
-    set name(name) { 
-        this._name = name; 
+    set name(name){
+        this._name = name;
     }
 
-    //method
     toString(){
-        return "id = "+this.id+", name = "+this.name+", salary = "+this.salary;
+        const option = { year: "numeric", month: "long", day: "numeric" }
+        const empDate = this.startDate === undefined ? "undefined" : this.startDate.toLocaleDateString("en-US", option);
+        return "Id = "+this.id+", Name = "+this.name+", Salary = "+this.salary+", Gender = "+this.gender+", StartDate = "+empDate;
     }
 }
-let employee = new Employee(1,"Rajeev",2000);
+let employee = new Employee(1, "Amaron", 3000);
 console.log(employee.toString());
 employee.id = 2;
 employee.name = "James";
-employee.salary = 3000;
+employee.salary = 1000;
 console.log(employee.toString());
+
+let employee1 = new Employee(3,"Ramya",2000,'F',new Date());
+console.log(employee1.toString());
